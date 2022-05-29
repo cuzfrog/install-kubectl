@@ -11,6 +11,7 @@ LABEL com.github.actions.description="Setup kubectl and run."
 LABEL com.github.actions.icon="terminal"
 LABEL com.github.actions.color="blue"
 
+RUN apk add --no-cache bash
 RUN apk add --no-cache curl
 
 COPY LICENSE README.md /

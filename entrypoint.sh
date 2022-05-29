@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -20,4 +20,5 @@ mv kubectl /usr/local/bin
 echo "$config" | base64 -d > /tmp/config
 export KUBECONFIG=/tmp/config
 
-sh -c "$run"
+output=$(eval "$run")
+echo "$output"
