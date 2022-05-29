@@ -19,8 +19,12 @@ jobs:
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           run: |
-            kubectl --dry-run=client apply -f test/app.pvc.yml
-            kubectl --dry-run=client apply -f test/app.service.yml
+            files=""
+            for file in test/app.pvc.yml test/app.service.yml; do
+              files="$files -f $file"
+            done
+            echo "kubectl apply $files"
+            kubectl apply --dry-run=client $files
 
   test-pr:
     runs-on: ubuntu-latest
