@@ -9,7 +9,7 @@ This action provides `kubectl` for GitHub Actions.
   uses: cuzfrog/setup-kubectl@v1
   with: # defaults to latest kubectl binary version
     config: ${{ secrets.KUBE_CONFIG_DATA }}
-    version: 1.21.6
+    version: v1.21.6
     run: |
       kubectl apply -f my-app.deployment.yml
       kubectl rollout status deployment/my-app
