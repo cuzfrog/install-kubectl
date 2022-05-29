@@ -9,13 +9,12 @@ env:
   BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
-  test-master:
+  test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v3
-      - name: Test Master 1
-        uses: cuzfrog/setup-kubectl@master
+      - name: Test1
+        uses: ./
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           run: |
@@ -25,35 +24,17 @@ jobs:
             done
             echo "kubectl apply $files"
             kubectl apply --dry-run=client $files
-      - name: Test Master 2
-        uses: cuzfrog/setup-kubectl@master
-        with:
-          config: ${{ secrets.KUBE_CONFIG_DATA }}
-          run: |
-            echo "Checking deployment..."
-            status=$(kubectl get deployment/sdms-poc-server-deployment -o jsonpath='{.status.conditions[?(@.type=="Available")].status}')
-            if [ "$status" != "True" ]; then
-              echo "Deployment not availble!"
-            else
-              echo "Deployment is availble."
-            fi
-
-  test-pr:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - uses: actions/checkout@v3
-      - name: Test PR
+      - name: Test3
         uses: ./
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
           run: |
-            kubectl --dry-run=client apply -f test/app.pvc.yml
-            kubectl --dry-run=client apply -f test/app.service.yml
+            envsubst <test/template
 
   move-tag:
-    needs: [test-master]
+    needs: [test]
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v3
       - name: Setup git

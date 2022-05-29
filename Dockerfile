@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-LABEL version="1.1.0"
+LABEL version="1.2.0"
 LABEL name="setup-kubectl"
 LABEL repository="http://github.com/cuzfrog/setup-kubectl"
 LABEL homepage="http://github.com/cuzfrog/setup-kubectl"
@@ -12,7 +12,7 @@ LABEL com.github.actions.icon="terminal"
 LABEL com.github.actions.color="blue"
 
 RUN apt update
-RUN apt install -y curl
+RUN apt install -y curl gettext
 
 COPY LICENSE README.md /
 COPY entrypoint.sh /entrypoint.sh

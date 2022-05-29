@@ -20,5 +20,5 @@ mv kubectl /usr/local/bin
 echo "$config" | base64 -d > /tmp/config
 export KUBECONFIG=/tmp/config
 
-output=$(eval "$run")
-echo "$output"
+echo "executing run script..."
+eval "$run"
