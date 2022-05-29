@@ -14,7 +14,7 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v3
-      - name: Test Master
+      - name: Test Master 1
         uses: cuzfrog/setup-kubectl@master
         with:
           config: ${{ secrets.KUBE_CONFIG_DATA }}
@@ -25,6 +25,18 @@ jobs:
             done
             echo "kubectl apply $files"
             kubectl apply --dry-run=client $files
+      - name: Test Master 2
+        uses: cuzfrog/setup-kubectl@master
+        with:
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          run: |
+            echo "Checking deployment..."
+            status=$(kubectl get deployment/sdms-poc-server-deployment -o jsonpath='{.status.conditions[?(@.type=="Available")].status}')
+            if [ "$status" != "True" ]; then
+              echo "Deployment not availble!"
+            else
+              echo "Deployment is availble."
+            fi
 
   test-pr:
     runs-on: ubuntu-latest
