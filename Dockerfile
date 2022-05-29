@@ -16,5 +16,7 @@ RUN apk add --no-cache curl
 COPY LICENSE README.md /
 COPY entrypoint.sh /entrypoint.sh
 
+RUN chmod +x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["help"]
