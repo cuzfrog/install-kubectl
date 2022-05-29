@@ -38,3 +38,18 @@ jobs:
           run: |
             kubectl --dry-run=client apply -f test/app.pvc.yml
             kubectl --dry-run=client apply -f test/app.service.yml
+
+  move-tag:
+    needs: [test-master]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup git
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: Move tag
+        run: |
+          git push --delete origin v1
+          git tag v1 ${{ github.sha }}
+          git push origin v1
