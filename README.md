@@ -26,5 +26,8 @@ cat kube.config | base64
 
 `version`: The kubectl version with a 'v' prefix, e.g. `v1.21.0`. It defaults to the latest kubectl binary version available.
 
+## TODO
+- [ ] outputs for `kubectl` install path. So it can possibly be reused in a later step. 
+
 ## Author
 Cause Chung <cuzfrog@gmail.com>

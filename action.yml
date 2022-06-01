@@ -1,4 +1,4 @@
-name: 'kubectl-simple'
+name: 'install-kubectl'
 description: 'The kubectl command line program as a GitHub Action'
 runs:
   using: 'docker'
