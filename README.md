@@ -1,4 +1,4 @@
-![test workflow](https://github.com/cuzfrog/setup-kubectl/actions/workflows/test-action.yml/badge.svg)
+![test workflow](https://github.com/cuzfrog/install-kubectl/actions/workflows/test-action.yml/badge.svg)
 # Setup kubectl in Github Actions
 
 This action provides `kubectl` for GitHub Actions.
@@ -6,7 +6,7 @@ This action provides `kubectl` for GitHub Actions.
 ## Usage
 ```yaml
 - name: deploy to cluster
-  uses: cuzfrog/setup-kubectl@v1
+  uses: cuzfrog/install-kubectl@v1
   with: # defaults to latest kubectl binary version
     config: ${{ secrets.KUBE_CONFIG_DATA }}
     version: v1.21.6
